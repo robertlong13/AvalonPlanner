@@ -6,7 +6,7 @@
         xmlns:views="clr-namespace:AvalonPlanner.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="AvalonPlanner.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/avp_icon.ico"
         Title="AvalonPlanner">
         <views:MainView />
 </Window>
