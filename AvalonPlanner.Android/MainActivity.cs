@@ -1,4 +1,4 @@
-﻿using Android.App;
+using Android.App;
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
@@ -7,7 +7,7 @@ using Avalonia.ReactiveUI;
 namespace AvalonPlanner.Android;
 
 [Activity(
-    Label = "AvalonPlanner.Android",
+    Label = "Avalon Planner",
     Theme = "@style/MyTheme.NoActionBar",
     Icon = "@mipmap/ic_launcher",
     MainLauncher = true,

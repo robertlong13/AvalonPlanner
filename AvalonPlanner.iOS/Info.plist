@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>AvalonPlanner</string>
+	<string>Avalon Planner</string>
 	<key>CFBundleIdentifier</key>
-	<string>companyName.AvalonPlanner</string>
+	<string>ArduPilot.AvalonPlanner</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
