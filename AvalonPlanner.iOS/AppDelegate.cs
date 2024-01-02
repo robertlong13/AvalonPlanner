@@ -1,12 +1,14 @@
-using Foundation;
-using UIKit;
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.iOS;
 using Avalonia.Media;
 using Avalonia.ReactiveUI;
+using Foundation;
+using UIKit;
 
+#pragma warning disable IDE1006 // Naming Styles
 namespace AvalonPlanner.iOS;
+#pragma warning restore IDE1006 // Naming Styles
 
 // The UIApplicationDelegate for the application. This class is responsible for launching the 
 // User Interface of the application, as well as listening (and optionally responding) to 

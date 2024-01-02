@@ -1,4 +1,4 @@
-using FluentAvalonia.UI.Windowing;
+﻿using FluentAvalonia.UI.Windowing;
 
 namespace AvalonPlanner.Views;
 
