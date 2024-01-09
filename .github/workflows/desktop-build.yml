@@ -1,0 +1,43 @@
+# Create a cross-platform binary in the form of a dll file
+#
+# This can be run using `dotnet AvalonPlanner.Desktop.dll`. This is useful for
+# testers to run a specific version of the application without having to build
+# it themselves or for the action to compile and cache a separate binary for
+# each platform.
+name: Continuous Integration for Desktop
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config: [ Debug, Release ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x.x
+
+      - name: Build with dotnet
+        run: >
+          dotnet publish
+          --configuration ${{ matrix.config }}
+          --output ${{ github.workspace }}/bin
+          AvalonPlanner.Desktop/AvalonPlanner.Desktop.csproj
+
+      - name: Archive binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: AvalonPlanner.Desktop.${{ matrix.config }}
+          path: ${{ github.workspace }}/bin
+          if-no-files-found: error
