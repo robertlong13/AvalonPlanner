@@ -1,0 +1,48 @@
+# Create an Android apk
+name: Continuous Integration for Android
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  build:
+    # Ubuntu can't install the "android" workflow for the dotnet cli
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x.x
+
+      - name: Decode Keystore
+        run: |
+          $base64String = '${{ secrets.ANDROID_KEY_STORE_BASE64 }}'
+          $bytes = [Convert]::FromBase64String($base64String)
+          [IO.File]::WriteAllBytes('${{ github.workspace }}/AvalonPlanner.Android/AvalonPlanner.Android.keystore', $bytes)
+
+      - name: Build with dotnet
+        run: >
+          dotnet publish
+          --configuration Release
+          --output ${{ github.workspace }}/bin
+          -p:AndroidKeyStore=true
+          -p:AndroidSigningKeyStore=AvalonPlanner.Android.keystore
+          -p:AndroidSigningStorePass="${{ secrets.ANDROID_KEY_PASSWORD }}"
+          -p:AndroidSigningKeyPass="${{ secrets.ANDROID_KEY_PASSWORD }}"
+          -p:AndroidSigningKeyAlias=${{ secrets.ANDROID_KEY_ALIAS }}
+          AvalonPlanner.Android/AvalonPlanner.Android.csproj
+
+      - name: Archive binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: AvalonPlanner.Android.Release
+          path: ${{ github.workspace }}/bin/*-Signed.apk
+          if-no-files-found: error
