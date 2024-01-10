@@ -1,10 +1,7 @@
 ﻿using Avalonia;
-using Avalonia.Controls;
 using Avalonia.iOS;
-using Avalonia.Media;
 using Avalonia.ReactiveUI;
 using Foundation;
-using UIKit;
 
 #pragma warning disable IDE1006 // Naming Styles
 namespace AvalonPlanner.iOS;
