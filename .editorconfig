@@ -231,3 +231,5 @@ csharp_preserve_single_line_statements = true
 
 # IDE0060: Remove unused parameter
 dotnet_diagnostic.IDE0060.severity = warning
+# IDE0005: Using directive is unnecessary
+dotnet_diagnostic.IDE0005.severity = warning
