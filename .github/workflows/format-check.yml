@@ -1,0 +1,24 @@
+name: .NET Format Check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  format:
+    # Ubuntu can't install the "android" workflow for the dotnet cli, which is
+    # required for `dotnet restore` and therefore `dotnet format`.
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x.x
+
+      - name: Check Format
+        run: dotnet format --verify-no-changes
